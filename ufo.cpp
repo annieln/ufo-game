@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unordered_set>
 #include <cctype>
 #include "ufo_functions.hpp"
 
@@ -17,6 +18,7 @@ int main() {
     int misses = 0;
 
     std::vector<char> incorrect;
+    std::unordered_set<char> attempts;
     bool guess = false;
 
     char letter;
@@ -27,10 +29,27 @@ int main() {
 
       display_status(incorrect, answer);
 
-      std::cout << "\n\nPlease enter your guess: ";
-      std::cin >> letter;
+      bool valid_letter = false;
 
-      letter = tolower(letter);
+      while (!valid_letter) {
+
+        std::cout << "\n\nPlease enter your guess: ";
+        std::cin >> letter;
+
+        letter = tolower(letter);
+
+        if (attempts.count(letter)) {
+
+          std::cout << "\n\nYou have already guessed this letter. Try again.";
+
+        } else {
+
+          attempts.insert(letter);
+          valid_letter = true;
+
+        }
+
+      }
 
       for (int i = 0; i < codeword.length(); i++) {
         if (letter == codeword[i]) {
