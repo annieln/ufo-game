@@ -3,6 +3,7 @@
 
 int main() {
 
+  std::vector<std::string> dictionary = dictionary_generator();
   bool play = true;
 
   while (play) {
