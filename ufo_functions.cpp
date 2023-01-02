@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <set>
+#include <fstream>
+#include <stdlib.h>
 
 /* Greets the player with game instructions. */
 
@@ -10,6 +13,34 @@ void greet() {
   std::cout << "=============\n";
   std::cout << "Instructions: save your friend from alien abduction by guessing the letters in the codeword.\n";
   
+}
+
+/* Generate a dictionary of words. */
+
+std::vector<std::string> dictionary_generator() {
+
+  std::vector<std::string> words;
+  std::ifstream file("nounlist.txt");
+  std::string str;
+
+  while (std::getline(file, str)) {
+    words.push_back(str);
+  }
+  file.close();
+
+  return words;
+
+}
+
+/* Get random word from dictionary. */
+std::string get_word(std::vector<std::string> dictionary) {
+
+  srand (time(NULL));
+
+  int i = rand() % dictionary.size();
+
+  return dictionary[i];
+
 }
 
 /* After each guess, display an update on what guesses have been correct and incorrect. */

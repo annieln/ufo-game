@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cctype>
 #include "ufo_functions.hpp"
 
 int main() {
@@ -10,8 +11,8 @@ int main() {
     
     greet();
 
-    std::string codeword = "codecademy";
-    std::string answer = "__________";
+    std::string codeword = get_word(dictionary);
+    std::string answer = std::string(codeword.length(), '_');
 
     int misses = 0;
 
@@ -28,6 +29,8 @@ int main() {
 
       std::cout << "\n\nPlease enter your guess: ";
       std::cin >> letter;
+
+      letter = tolower(letter);
 
       for (int i = 0; i < codeword.length(); i++) {
         if (letter == codeword[i]) {
